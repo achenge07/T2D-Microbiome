@@ -191,7 +191,13 @@
         </div>
         <div class="mainContent" id="right">
 	<div id='loading'>
-	loading
+	Loading....
+	<br>
+        If slow, please choose another URL below.
+	<ul>
+	<li><a href='https://achenge07.github.io/T2D-Microbiome/'>https://achenge07.github.io/T2D-Microbiome/</a></li>
+	<li><a href='http://omics.bmi.ac.cn/t2dMicrobiome/'>http://omics.bmi.ac.cn/t2dMicrobiome/</a></li>
+	</ul>
 	</div>
 	<div id='right-content'></div>
         </div>
@@ -213,7 +219,8 @@
                     $(this).addClass("current");
                 });
                 $(function() {
-                    $("#right").load('overview.html');
+		    $("#loading").hide();
+                    $("#right-content").load('overview.html');
                 });
             </script>
 
