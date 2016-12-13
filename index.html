@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Source code for manuscript</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--
+        <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+        <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	-->
+	
+        <link rel="stylesheet" href="http://cdn.besdlab.cn/bootstrap/css/bootstrap.min.css">
+        <script src="http://cdn.besdlab.cn/jquery/2.1.1/jquery.2.1.1.min.js"></script>
+        <script src="http://cdn.besdlab.cn/bootstrap/js/bootstrap.min.js"></script>
+
+        <style type='text/css'>
+            body,
+            html {
+                margin: 0;
+                height: 100%;
+            }
+            @media (min-width: 768px) {
+                #left {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    width: 15%;
+                    overflow-y: scroll;
+                }
+                #right {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    right: 0;
+                    overflow-y: scroll;
+                    width: 85%;
+                }
+            }
+
+            #left {
+                background-color: #d2e4ea;
+                padding-top: 20px;
+                padding-left: 0;
+                padding-right: 0;
+                font-size: 14px;
+            }
+
+            #right {
+                height: 100%;
+            }
+
+            .nav > li > .menuItem {
+                padding: 2px;
+            }
+
+            .mainContent #notebook {
+                padding: 0;
+            }
+            .current {
+                background: #eeeeee;
+		font-weight:bold;
+            }
+            div.input_prompt {
+                display: none;
+            }
+            .stepcol {
+                padding: 1px;
+            }
+
+        </style>
+        <script>
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?1837ec5d791305b7225c7ca382f2f70d";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+
+    </head>
+    <body>
+        <div id="left">
+            <ul class="nav nav-pills nav-stacked" role="tablist">
+                <li role="presentation">
+                    <a href="#" onclick="loadhtml('overview.html')" class='menuItem'>
+                        <div >Overview</div>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#" onclick="loadhtml('qc.html')" class='menuItem'>
+                        <div class='row'>
+                            <div class='stepcol col-md-3 col-xs-12'>Step1.</div>
+                            <div class='descol col-md-9'>Quality control</div>
+                        </div>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#" onclick="loadhtml('callSNP.html')" class='menuItem'>
+                        <div class='row'>
+                            <div class='stepcol col-md-3 col-xs-12'>Step2.</div>
+                            <div class='descol col-md-9'>SNP calling</div>
+                        </div>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#" onclick="loadhtml('filterspecies.html')" class='menuItem'>
+                        <div class='row'>
+                            <div class='stepcol col-md-3 col-xs-12'>Step3.</div>
+                            <div class='descol col-md-9'>Filter species</div>
+                        </div>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#" onclick="loadhtml('statDensity4species.html')" class='menuItem'>
+                        <div class='row'>
+                            <div class='stepcol col-md-3 col-xs-12'>Step4.</div>
+                            <div class='descol col-md-9'>SNP density analysis</div>
+                        </div>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#" onclick="loadhtml('phylotree4species.html')" class='menuItem'>
+                        <div class='row'>
+                            <div class='stepcol col-md-3 col-xs-12'>Step5.</div>
+                            <div class='descol col-md-9'>Phylogenetic tree of species</div>
+                        </div>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#" onclick="loadhtml('clustering.html')" class='menuItem'>
+                        <div class='row'>
+                            <div class='stepcol col-md-3 col-xs-12'>Step6.</div>
+                            <div class='descol col-md-9'>Clustering based on MuAFs of species</div>
+                        </div>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#" onclick="loadhtml('filtergene.html')" class='menuItem'>
+                        <div class='row'>
+                            <div class='stepcol col-md-3 col-xs-12'>Step7.</div>
+                            <div class='descol col-md-9'>Filter genes</div>
+                        </div>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#" onclick="loadhtml('enrichment.html')" class='menuItem'>
+                        <div class='row'>
+                            <div class='stepcol col-md-3 col-xs-12'>Step8.</div>
+                            <div class='descol col-md-9'>Biased SNPs enrichment</div>
+                        </div>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#" onclick="loadhtml('phylotree4genes.html')" class='menuItem'>
+                        <div class='row'>
+                            <div class='stepcol col-md-3 col-xs-12'>Step9.</div>
+                            <div class='descol col-md-9'>Phylogenetic tree of genes</div>
+                        </div>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#" onclick="loadhtml('clusteringGenes.html')" class='menuItem'>
+                        <div class='row'>
+                            <div class='stepcol col-md-3 col-xs-12'>Step10.</div>
+                            <div class='descol col-md-9'>Clustering based on MuAFs of genes</div>
+                        </div>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#" onclick="loadhtml('plot.html')" class='menuItem'>
+                        <div class='row'>
+                            <div class='stepcol col-md-3 col-xs-12'>Step11.</div>
+                            <div class='descol col-md-9'>Scripts for drawing main figures</div>
+                        </div>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#" onclick="loadhtml('keyFiles.html')" class='menuItem'>
+                        <div > Information files</div>
+</a>
+                </li>
+            </ul>
+
+        </div>
+        <div class="mainContent" id="right">
+        </div>
+        
+    </body>
+    <script>
+                function loadhtml(htmlfile) {
+                    console.log(htmlfile);
+                    $("#right").hide().load(htmlfile, function(responseText, textStatus, XMLHttpRequest) {
+                        $(this).fadeIn();
+                        window.location.hash = "#Table-of-Contents";
+                    });
+                }
+                $(".menuItem").click(function() {
+                    $(".menuItem").removeClass("current");
+                    $(this).addClass("current");
+                });
+                $(function() {
+                    $("#right").load('overview.html');
+                });
+            </script>
+
+</html>
