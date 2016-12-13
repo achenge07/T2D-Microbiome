@@ -190,13 +190,20 @@
 
         </div>
         <div class="mainContent" id="right">
+	<div id='loading'>
+	loading
+	</div>
+	<div id='right-content'></div>
         </div>
         
     </body>
     <script>
                 function loadhtml(htmlfile) {
                     console.log(htmlfile);
-                    $("#right").hide().load(htmlfile, function(responseText, textStatus, XMLHttpRequest) {
+		    $("#loading").show();
+                    //$("#right").hide().load(htmlfile, function(responseText, textStatus, XMLHttpRequest) {
+                    $("#right-content").hide().load(htmlfile, function(responseText, textStatus, XMLHttpRequest) {
+		    $("#loading").hide();
                         $(this).fadeIn();
                         window.location.hash = "#Table-of-Contents";
                     });
