@@ -209,17 +209,23 @@
 		    $("#loading").show();
                     //$("#right").hide().load(htmlfile, function(responseText, textStatus, XMLHttpRequest) {
                     $("#right-content").hide().load(htmlfile, function(responseText, textStatus, XMLHttpRequest) {
+		    if(textStatus==='error' || textStatus==='timeout'){
+                        $(this).fadeIn();
+		    }
+		    else{
 		    $("#loading").hide();
                         $(this).fadeIn();
                         window.location.hash = "#Table-of-Contents";
-                    });
+                    }
+		    }
+		    );
                 }
                 $(".menuItem").click(function() {
                     $(".menuItem").removeClass("current");
                     $(this).addClass("current");
                 });
                 $(function() {
-		    $("#loading").hide();
+		    //$("#loading").hide();
                     $("#right-content").load('overview.html');
                 });
             </script>
