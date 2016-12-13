@@ -210,7 +210,9 @@
                     //$("#right").hide().load(htmlfile, function(responseText, textStatus, XMLHttpRequest) {
                     $("#right-content").hide().load(htmlfile, function(responseText, textStatus, XMLHttpRequest) {
 		    if(textStatus==='error' || textStatus==='timeout'){
-                        $(this).fadeIn();
+		    	console.log('network error');
+                        //$(this).fadeIn();
+			$(this).html('<h1>Network error</h1>');
 		    }
 		    else{
 		    $("#loading").hide();
