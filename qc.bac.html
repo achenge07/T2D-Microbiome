@@ -11968,19 +11968,22 @@ AGATCGGAAGAGCGTCGTGT
     <span class="k">else</span><span class="p">:</span>
         <span class="n">myopen</span> <span class="o">=</span> <span class="nb">open</span>
 
-    <span class="n">seqLength</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">with</span> <span class="n">myopen</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">inpf</span><span class="p">:</span>
         <span class="n">tmpflag</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">inpf</span><span class="p">:</span>
             <span class="n">tmpflag</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="n">line</span> <span class="o">=</span> <span class="n">inpf</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
             <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-            <span class="n">seqLength</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">tmpflag</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)):</span>
+                    <span class="n">bigTable</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+                    <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="s1">&#39;ATGCN&#39;</span><span class="p">:</span>
+                        <span class="n">bigTable</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">base</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
             <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">bigTable</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;null&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;null&#39;</span><span class="p">:</span>
-                    <span class="n">bigTable</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-                <span class="n">bigTable</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">base</span><span class="p">]</span>  <span class="o">=</span> <span class="n">bigTable</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">base</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">bigTable</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">base</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="n">line</span> <span class="o">=</span> <span class="n">inpf</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
             <span class="n">line</span> <span class="o">=</span> <span class="n">inpf</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
@@ -11989,8 +11992,8 @@ AGATCGGAAGAGCGTCGTGT
     <span class="n">lowLimmit</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">]:</span>
         <span class="n">curList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">seqLength</span><span class="p">):</span>
-            <span class="n">curList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bigTable</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">base</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">bigTable</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">curList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bigTable</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="n">base</span><span class="p">])</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">curList</span><span class="p">)</span>
         <span class="n">aver</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
         <span class="n">std</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
@@ -11998,7 +12001,7 @@ AGATCGGAAGAGCGTCGTGT
         <span class="n">lowL</span> <span class="o">=</span> <span class="n">aver</span><span class="o">-</span><span class="n">std</span><span class="o">*</span><span class="mi">2</span>
         <span class="n">upLimit</span><span class="p">[</span><span class="n">base</span><span class="p">]</span> <span class="o">=</span> <span class="n">upL</span>
         <span class="n">lowLimmit</span><span class="p">[</span><span class="n">base</span><span class="p">]</span> <span class="o">=</span> <span class="n">lowL</span>
-    <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">seqLength</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">bigTable</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
         <span class="n">curDict</span> <span class="o">=</span> <span class="n">bigTable</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
         <span class="n">flag</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">]:</span>
